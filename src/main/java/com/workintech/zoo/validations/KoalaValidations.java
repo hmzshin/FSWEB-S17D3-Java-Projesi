@@ -1,6 +1,8 @@
-package com.workintech.zoo.exceptions;
+package com.workintech.zoo.validations;
 
 import com.workintech.zoo.entity.Koala;
+import com.workintech.zoo.exceptions.KoalaException;
+
 import org.springframework.http.HttpStatus;
 
 import java.util.Map;
@@ -27,8 +29,7 @@ public class KoalaValidations {
         if (koala == null ||
                 koala.getName() == null || koala.getName().isEmpty() ||
                 koala.getGender() == null || koala.getGender().isEmpty() ||
-                koala.getWeight() < 0 || koala.getSleepHour() < 0 || koala.getId() < 0
-        ) {
+                koala.getWeight() < 0 || koala.getSleepHour() < 0 || koala.getId() < 0) {
             throw new KoalaException(KOALA_CREDENTIALS_NOT_VALID, HttpStatus.BAD_REQUEST);
         }
     }

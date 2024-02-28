@@ -1,6 +1,8 @@
-package com.workintech.zoo.exceptions;
+package com.workintech.zoo.validations;
 
 import com.workintech.zoo.entity.Kangaroo;
+import com.workintech.zoo.exceptions.KangarooException;
+
 import org.springframework.http.HttpStatus;
 
 import java.util.Map;
@@ -28,8 +30,7 @@ public class KangarooValidations {
         if (kangaroo == null ||
                 kangaroo.getName() == null || kangaroo.getName().isEmpty() ||
                 kangaroo.getGender() == null || kangaroo.getGender().isEmpty() ||
-                kangaroo.getWeight() < 0 || kangaroo.getHeight() < 0 || kangaroo.getId() < 0
-        ) {
+                kangaroo.getWeight() < 0 || kangaroo.getHeight() < 0 || kangaroo.getId() < 0) {
             throw new KangarooException(KANGAROO_CREDENTIALS_NOT_VALID, HttpStatus.BAD_REQUEST);
         }
     }

@@ -1,9 +1,11 @@
 package com.workintech.zoo.controller;
 
 import com.workintech.zoo.entity.Kangaroo;
-import com.workintech.zoo.exceptions.KangarooException;
-import com.workintech.zoo.exceptions.KangarooValidations;
+import com.workintech.zoo.validations.KangarooValidations;
+
 import jakarta.annotation.PostConstruct;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -26,13 +28,13 @@ public class KangarooController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Kangaroo> findAll() {
         return kangarooMap.values().stream().toList();
     }
 
-
     @GetMapping("/{id}")
-    public Kangaroo findById(@PathVariable Integer id) {
+    public Kangaroo findById(@PathVariable("id") Integer id) {
         KangarooValidations.isIdValid(id);
         return kangarooMap.get(id);
     }
@@ -43,7 +45,6 @@ public class KangarooController {
         kangarooMap.put(kangaroo.getId(), kangaroo);
         return kangarooMap.get(kangaroo.getId());
     }
-
 
     @PutMapping("/{id}")
     public Kangaroo updateKangaroo(@RequestBody Kangaroo kangaroo, @PathVariable Integer id) {

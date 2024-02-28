@@ -1,7 +1,8 @@
 package com.workintech.zoo.controller;
 
 import com.workintech.zoo.entity.Koala;
-import com.workintech.zoo.exceptions.KoalaValidations;
+import com.workintech.zoo.validations.KoalaValidations;
+
 import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,6 @@ public class KoalaController {
         return koalaMap.values().stream().toList();
     }
 
-
     @GetMapping("/{id}")
     public Koala findById(@PathVariable Integer id) {
         KoalaValidations.isIdValid(id);
@@ -42,7 +42,6 @@ public class KoalaController {
         koalaMap.put(koala.getId(), koala);
         return koalaMap.get(koala.getId());
     }
-
 
     @PutMapping("/{id}")
     public Koala updateKoala(@RequestBody Koala koala, @PathVariable Integer id) {
